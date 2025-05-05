@@ -1,0 +1,147 @@
+/* Base styling */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 1rem; /* Scales better than fixed px */
+    }
+}
+
+/* Blog header styling */
+.blog-header {
+    margin-top: 7rem;
+    max-width: 700px;
+}
+
+@media (max-width: 768px) {
+    .blog-header {
+        margin-top: 8rem;
+    }
+}
+
+/* Team section styling */
+.team {
+    overflow-x: auto; /* Ensures scroll works on all devices */
+    white-space: nowrap;
+    margin-bottom: 2rem;
+    gap: 1rem; /* Adds spacing between elements */
+}
+
+/* Horizontal scrolling for images */
+.d-flex {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks */
+    gap: 10px; /* Add space between images */
+    max-width: 100%; /* Ensure the container takes up full width */
+}
+
+.d-flex img {
+    width: 90px; /* Set a fixed width for images */
+    height: 90px; /* Ensure they are square */
+    object-fit: cover;
+    
+    
+}
+
+/* Scrollbar customization */
+.d-flex::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.d-flex::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Scrollbar thumb color */
+    border-radius: 4px;
+}
+
+.d-flex::-webkit-scrollbar-track {
+    background-color: #f9f9f9; /* Scrollbar track color */
+}
+
+/* Single Post Layout (Instagram-style) */
+.container {
+    max-width: 900px;
+    padding: 0 15px;
+    margin-top: 100px; /* Push content below the fixed navbar */
+}
+
+/* Cards for Posts */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px; /* Adds space between posts */
+}
+
+/* Image Styling */
+.card-body img {
+    width: 100%;
+    height: 400px; /* Set a fixed height for consistency */
+    object-fit: cover;
+}
+
+/* Button Group Styling */
+.btn-group button {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Card Header */
+.card-header {
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Layout Adjustments for Single Post View */
+.card-body {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Button Group Styling */
+.btn-group button {
+    font-size: 20px;
+    color: #555;
+}
+
+/* Small text below buttons */
+.card-body small {
+    color: #888;
+}
+
+/* Active link styling */
+.active {
+    border-bottom: 1px solid black;
+}
+
+/* Adjust Navbar Links to Display Horizontally */
+nav {
+    display: flex;
+    flex-direction: row; /* Keep links in a row */
+    align-items: center; /* Center the items vertically */
+    gap: 15px; /* Space between links */
+}
+
+nav a {
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px;
+    font-size: 18px; /* Adjust font size */
+    color: #333;
+}
+
+nav a:hover {
+    background-color: #f0f0f0; /* Add hover effect */
+}
+
+
+
+
+
+
+
+
+

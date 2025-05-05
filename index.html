@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Sharifa">
+    <title>Mini Blog</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./custom.css">
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Style for active navigation link */
+        .nav-link.active {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        /* Ensure images are responsive and maintain aspect ratio */
+        img {
+            width: 100%; /* Let images scale based on container width */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: contain; /* Prevent zooming and cropping */
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <!-- Fixed Navbar -->
+    <div class="d-flex flex-column align-items-center p-3 bg-white border-bottom box-shadow fixed-top">
+        <img src="img/mini-blog-logo.png" alt="Mini Blog Logo" style="max-width: 100%; height: auto;">
+
+        <nav>
+            <a href="#" id="getLatest" class="p-2 text-dark nav-link">Latest</a>
+            <a href="#" id="getAll" class="p-2 text-dark nav-link active">All</a>
+            <a href="#" id="getPopular" class="p-2 text-dark nav-link">Popular</a>
+        </nav>
+    </div>
+
+    <!-- Blog Header -->
+    <div class="blog-header mx-auto text-center mt-10 pt-5">
+        <h1>Is it Beautiful?</h1>
+        <p class="lead">All the latest <strong><em>Tech</em></strong>, <strong><em>Design</em></strong>, and <strong><em>Development</em></strong> news from around the world.</p>
+    </div>
+
+    <!-- Image container with horizontal scrolling -->
+    <div class="d-flex mt-4 team">
+        <img src="./img/thandi.jpg" class="img-thumbnail rounded-circle" alt="Thandi">
+        <img src="./img/john.jpg" class="img-thumbnail rounded-circle" alt="John">
+        <img src="./img/sally.jpg" class="img-thumbnail rounded-circle" alt="Sally">
+        <img src="./img/lungi.jpg" class="img-thumbnail rounded-circle" alt="Lungi">
+        <img src="./img/bob.jpg" class="img-thumbnail rounded-circle" alt="Bob">
+        <img src="./img/dave.jpg" class="img-thumbnail rounded-circle" alt="Dave">
+        <img src="img/jane.jpg" class="img-thumbnail rounded-circle" alt="Jane">
+        <img src="./img/andile.jpg" class="img-thumbnail rounded-circle" alt="Andile">
+        <img src="./img/lee.jpg" class="img-thumbnail rounded-circle" alt="Lee">
+    </div>
+
+    <!-- Post Section -->
+    <div class="container mt-5">
+        <div class="row" id="posts">
+            Loading content...
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="jquery-3.4.1.js"></script>
+    <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var rootpath; // Ensure this variable is properly defined
+
+        function init() {
+            rootpath = "https://mysite.itvarsity.org/api/mini-blog/";
+
+            // Attach event listeners
+            document.getElementById("getAll").addEventListener('click', getAllPosts);
+            document.getElementById("getPopular").addEventListener('click', getPopularPosts);
+            document.getElementById("getLatest").addEventListener('click', getLatestPosts);
+
+            getAllPosts(); // Fetch all posts on page load
+        }
+
+        function getAllPosts() {
+            category = "getAll";
+            fetchPosts(category);
+            setActivelink(category);
+        }
+
+        function getPopularPosts() {
+            category = "getPopular";
+            fetchPosts(category);
+            setActivelink(category);
+        }
+
+        function getLatestPosts() {
+            category = "getLatest";
+            fetchPosts(category);
+            setActivelink(category);
+        }
+
+        function fetchPosts(category) {
+            fetch(rootpath + 'get-posts/?category=' + category)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    displayPosts(data);
+                })
+                .catch(function (error) {
+                    console.error('Error fetching posts:', error);
+                })
+        }
+
+        function displayPosts(data) {
+            var output = "";
+
+            for (a = 0; a < data.length; a++) {
+                output += `
+                    <div class="col-12 mb-4">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">${data[a][0]}</h4>
+                            </div>
+                            <div class="card-body">
+                                <img src="${rootpath}/uploads/${data[a][3]}" class="img-fluid" alt="Post Image">
+                                <p class="card-text">${data[a][1]}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-lg btn-link"><i class="far fa-heart"></i></button>
+                                        <button type="button" class="btn btn-lg btn-link"><i class="far fa-comment"></i></button>
+                                        <button type="button" class="btn btn-lg btn-link"><i class="fas fa-retweet"></i></button>
+                                    </div>
+                                    <small class="text-muted">${data[a][2]}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            document.getElementById("posts").innerHTML = output;
+        }
+
+        function setActivelink(id){
+            document.getElementById("getAll").classList.remove("active");
+            document.getElementById("getPopular").classList.remove("active");
+            document.getElementById("getLatest").classList.remove("active");
+
+            document.getElementById(id).classList.add("active");
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
